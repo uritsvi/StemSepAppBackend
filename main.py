@@ -1,14 +1,19 @@
+import os
+
 from fastapi import FastAPI, Depends
 from supabase import create_client, Client
+import dotenv
 
 # Initialize FastAPI app
 app = FastAPI()
 
-# Supabase configuration
-SUPABASE_URL = "https://your-supabase-url.supabase.co"
-SUPABASE_KEY = "your-supabase-key"
 
-# Create Supabase client
+dotenv.load_dotenv()  # Load environment variables from .env file
+
+# Supabase configuration
+SUPABASE_URL = os.getenv("SUPABASE_URL", None)
+SUPABASE_KEY = os.getenv("SUPABASE_KEY", None)
+
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 # Dependency to provide Supabase client

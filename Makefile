@@ -1,3 +1,8 @@
+ifneq (,$(wildcard .env))
+    include .env
+    export
+endif
+
 build_container:
 	. venv/bin/activate && pip freeze > requirements.txt
 	docker build -t stem-sep-app-backend:latest .
